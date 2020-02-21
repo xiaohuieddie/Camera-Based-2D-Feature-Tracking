@@ -63,7 +63,7 @@ int main(int argc, const char *argv[])
         DataFrame frame;
         frame.cameraImg = imgGray;
       
-      	if (dataBuffer.size < dataBufferSize){
+      	if (dataBuffer.size() < dataBufferSize){
         	dataBuffer.push_back(frame);
         }
       	else{
@@ -94,7 +94,7 @@ int main(int argc, const char *argv[])
         }
       	else
         {
-            detKeypointsModern(keypoints, imgGray, descriptorType, bVis);
+            detKeypointsModern(keypoints, imgGray, detectorType, bVis);
         }
       	
         //// EOF STUDENT ASSIGNMENT
@@ -105,24 +105,29 @@ int main(int argc, const char *argv[])
         // only keep keypoints on the preceding vehicle
         bool bFocusOnVehicle = true;
         cv::Rect vehicleRect(535, 180, 180, 150);
+      	vector<cv::KeyPoint> keypoints_cropped;
+      	cout << "Number of keypoints before cropping:" << keypoints.size() << endl;
+      	
         if (bFocusOnVehicle)
         {
             int x_min = vehicleRect.x;
           	int x_max = vehicleRect.x + vehicleRect.width;
             int y_min = vehicleRect.y;
             int y_max = vehicleRect.y + vehicleRect.height;
-            for (auto it = keypoints.begin(); it != keypoints.end(); ++it)
+            //Erase the keypoints which are out of the  defined rectangular box
+          	for (auto it = keypoints.begin(); it != keypoints.end(); ++it)
             {
-              if ((*it.pt.x < x_max) && (*it.pt.x > x_min) && (*it.pt.y < y_max) && (*it.pt.y > y_min)){
+              if ((it->pt.x < x_max) && (it->pt.x > x_min) && (it->pt.y < y_max) && (it->pt.y > y_min)){
+                keypoints_cropped.push_back(*it);
+              }
+              else{
                 continue;
               }
-              else
-              {
-                //Erase the keypoints which are out of the  defined rectangular box
-                keypoints.erase(it);
-              }
             }
+          	keypoints = keypoints_cropped;
+          	cout<< "Number of keypoints after cropping:" << keypoints.size() << endl;
         }
+      	
 
         //// EOF STUDENT ASSIGNMENT
 
@@ -198,7 +203,9 @@ int main(int argc, const char *argv[])
 
                 string windowName = "Matching keypoints between two camera images";
                 cv::namedWindow(windowName, 7);
-                cv::imshow(windowName, matchImg);
+                
+              	cv::rectangle(matchImg, vehicleRect, cv::Scalar(255, 0, 0),3);
+              	cv::imshow(windowName, matchImg);
                 cout << "Press key to continue to next image" << endl;
                 cv::waitKey(0); // wait for key to be pressed
             }

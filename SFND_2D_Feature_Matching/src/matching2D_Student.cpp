@@ -73,7 +73,7 @@ void descKeypoints(vector<cv::KeyPoint> &keypoints, cv::Mat &img, cv::Mat &descr
     }
   	else if (descriptorType.compare("BRIEF") == 0)
     {
-        extractor = cv.xfeatures2d.BriefDescriptorExtractor::create();
+        extractor = cv::xfeatures2d::BriefDescriptorExtractor::create();
     }
     else if (descriptorType.compare("ORB") == 0)
     {
@@ -218,7 +218,7 @@ void detKeypointsHarris(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis
 }
 
 // Detect keypoints in image using the Morden detectors such as FAST, BRISK, ORB, AKAZE, SIFT
-void detKeypointsModern(std::vector<cv::KeyPoint> &keypoints, cv::Mat &img, std::string detectorType, bool bVis=false)
+void detKeypointsModern(vector<cv::KeyPoint> &keypoints, cv::Mat &img, string detectorType, bool bVis)
 {
   
   	// assign detector
