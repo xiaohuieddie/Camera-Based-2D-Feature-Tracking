@@ -129,6 +129,7 @@ Count the number of keypoints on the preceding vehicle for all 10 images and tak
 |ORB          |87/500  |101/500 |105/500 |110/500 |106/500 |121/500 |128/500 |120/500 |117/500 |117/500 |
 |AKAZE        |162/1351|157/1327|159/1311|154/1351|162/1360|163/1347|173/1363|175/1331|175/1357|175/1331|
 |SIFT         |137/1438|131/1371|121/1380|135/1335|134/1305|139/1370|136/1396|147/1382|156/1463|135/1422|
+
 Table above is the generated **Keypoints.csv** file in when the function `Datalog` is turned on (`data_save = true`). The result is saved in the path: **SFND_2D_Feature_Matching/Result/Keypoints.csv**
 ```
 // data log
@@ -182,6 +183,7 @@ Count the number of matched keypoints for all 10 images using all possible combi
 |SIFT         |FREAK          |58      |61      |52      |63      |51      |51      |48      |53      |65      |       |
 |SIFT         |AKAZE          |N/A     |N/A     |N/A     |N/A     |N/A     |N/A     |N/A     |N/A     |N/A     |       |
 |SIFT         |SIFT           |81      |79      |83      |92      |90      |82      |82      |100     |101     |       |
+
 Table above is the generated **Matches.csv** file when the function `Datalog` is turned on (`data_save = true`). The result is saved in the path: **SFND_2D_Feature_Matching/Result/Matches.csv** 
 
 The result is based on the following setting. The BF approach is used with the descriptor distance ratio set to 0.8.
