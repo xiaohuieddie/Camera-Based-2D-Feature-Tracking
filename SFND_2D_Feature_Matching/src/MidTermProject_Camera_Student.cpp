@@ -163,7 +163,6 @@ void DataLog(vector<string> detectorType_list, vector<string> descriptorType_lis
     // Loop each detector type
     for (auto it=detectorType_list.begin(); it<detectorType_list.end(); ++it)
     {
-      
       // Loop each descriptor type 
       for (auto i=descriptorType_list.begin(); i<descriptorType_list.end(); ++i)
       {
